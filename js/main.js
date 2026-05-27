@@ -62,7 +62,9 @@ const vegetableCheckboxes = document.querySelectorAll(".veg");
 const result = document.getElementById("result");
 const warning = document.getElementById("warning");
 const findBtn = document.getElementById("findBtn");
+let itemsInBasket = document.getElementById("basketCount");
 
+let items = 0;
 // =========================
 // EVENTS
 // =========================
@@ -179,8 +181,6 @@ function showDish(title, message, image, dish = null) {
 
 	const tags = generateVegTags(dish);
 
-	console.log(dish);
-
 	result.innerHTML = `
         <div class="modal">
             <h2>${title}</h2>
@@ -246,9 +246,12 @@ function startOver() {
 // =========================
 
 let quantity = 1;
-//ONLY ONE PRICE AS THERE IS NO PRICE VALUE FOR THE DISHES YET
+
 function openOrderForm(id) {
 	result.innerHTML = "";
+
+	//CURRENTLY DEFAULT THE VALUE TO 1 DISH RIGHT AWAY
+	updateBasket(1);
 
 	const dish = dishes.find((dish) => dish.id === id);
 
@@ -286,6 +289,20 @@ function changeQuantity(amount, price) {
 	const total = quantity * price;
 
 	document.getElementById("total").innerText = total.toFixed(2);
+
+	//CHANGE THE NUMBER IN THE BASKET
+	updateBasket(amount);
+}
+
+function updateBasket(amount) {
+
+	if (items >= 1) {
+		items += amount;
+		itemsInBasket.innerText = items;
+	} else {
+		itemsInBasket.innerText = amount;
+		items += amount;
+	}
 }
 
 function checkoutOrOrder() {
