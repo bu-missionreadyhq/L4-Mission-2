@@ -3,6 +3,7 @@
 // =========================
 const dishes = [
 	{
+		id: 1,
 		name: "Pad Kra Pao",
 		category: "stirfry",
 		meat: "beef",
@@ -12,6 +13,7 @@ const dishes = [
 	},
 
 	{
+		id: 2,
 		name: "Green Curry",
 		category: "curry",
 		meat: "chicken",
@@ -21,15 +23,24 @@ const dishes = [
 	},
 
 	{
+		id: 3,
 		name: "Papaya Salad",
 		category: "salad",
 		meat: "shrimp",
-		vegetables: ["basil", "onion", "mushroom", "papaya", "tomato", 'eggplant'],
+		vegetables: [
+			"basil",
+			"onion",
+			"mushroom",
+			"papaya",
+			"tomato",
+			"eggplant",
+		],
 		spicy: "kiwihot",
 		image: "images/papaya-salad.jpg",
 	},
 
 	{
+		id: 5,
 		name: "Mushroom Stir Fry",
 		category: "stirfry",
 		meat: "tofu",
@@ -64,9 +75,8 @@ findBtn.addEventListener("click", findFood);
 
 function checkLimit(event) {
 	const totalChecked = getSelectedVegetables().length;
-    
-	if (totalChecked > 3) {
 
+	if (totalChecked > 3) {
 		//CHECKBOX HAS THE PROPERTY OF CHECK [https://www.w3schools.com/jsreF/prop_checkbox_checked.asp]
 		event.target.checked = false;
 		warning.innerText = "You can only select 3 vegetables.";
@@ -123,7 +133,7 @@ function findFood() {
 		}
 
 		// CHECK EVERYTHING [IF MULTIPLE MACH, THIS WILL RETURN THE LAST DISH THAT MATCH] /
-        // FUTURE ASSIGN DISH FOUND TO ARRAY THEN DISPLAY SO CUSTOMER CAN CHOOSE
+		// FUTURE ASSIGN DISH FOUND TO ARRAY THEN DISPLAY SO CUSTOMER CAN CHOOSE
 		if (
 			dish.meat === meat &&
 			dish.spicy === spicy &&
@@ -140,15 +150,16 @@ function findFood() {
 			foundDish.name,
 			" 😉 Perfect match for your taste!",
 			foundDish.image,
-			true,
 			foundDish,
 		);
 	} else {
-		const recommendation = dishes[Math.floor(Math.random() * dishes.length)];
+		const recommendation =
+			dishes[Math.floor(Math.random() * dishes.length)];
 		showDish(
 			"No Posible Match 😢",
 			`Chef recommends: ${recommendation.name}`,
 			recommendation.image,
+			recommendation,
 		);
 	}
 
@@ -159,19 +170,21 @@ function findFood() {
 // SHOW THE DISH
 // =========================
 
-function showDish(title, message, image, showTags = false, dish = null) {
+function showDish(title, message, image, dish = null) {
 	result.style.display = "block";
 
-	const tags = showTags ? generateVegTags(dish) : "";
+	const tags = generateVegTags(dish);
+
+	console.log(dish);
 
 	result.innerHTML = `
         <div class="modal">
             <h2>${title}</h2>
-            ${tags}
-            <p style="margin-top:15px; font-weight: 200px;">${message}</p>
+			<p style="margin-top:15px; font-weight: 200px;">${message}</p>
+            ${tags}           
             <img src="${image}">
             <div class="button-group">
-                <button class="order-btn">Order</button>
+                <button class="order-btn" onclick='openOrderForm(${dish.id})'>Order</button>
                 <button class="again-btn" onclick="startOver()">
                     Find My Food Again
                 </button>
@@ -206,8 +219,7 @@ function generateVegTags(dish) {
 // =========================
 
 function resetSelections() {
-
-    // INFORMATION FROM 'https://developer.mozilla.org/en-US/docs/Web/API/HTMLSelectElement'
+	// INFORMATION FROM 'https://developer.mozilla.org/en-US/docs/Web/API/HTMLSelectElement'
 	document.getElementById("meat").selectedIndex = 0;
 	document.getElementById("spicy").selectedIndex = 0;
 	document.getElementById("category").selectedIndex = 0;
@@ -224,4 +236,73 @@ function resetSelections() {
 function startOver() {
 	result.style.display = "none";
 	document.getElementById("options").style.display = "block";
+}
+
+
+// =========================
+// ORDER PAGE
+// =========================
+
+let quantity = 1;
+
+//ONLY ONE PRICE AS THERE IS NO PRICE VALUE FOR THE DISHES YET
+const price = 45.5;
+
+function openOrderForm(id) {
+	result.innerHTML = "";
+
+	const dish = dishes.find((dish) => dish.id === id);
+
+	result.innerHTML = `
+			<div class="order-modal">
+   				 <h2>${dish.name}</h2>
+   				 <div class="quantity-box">
+					<button onclick="changeQuantity(-1)">-</button>
+					<p class='title'>Qty</p>
+					<span id="quantity">1</span>
+      				  <button onclick="changeQuantity(1)">+</button>
+   				 </div>
+				 <div class="price-box">
+				 	<p class='title'>Price:</p>
+					<p>$45.50</p>
+				 </div>
+				 <div class="total-box">
+				 	<p class='title'>Total:</>
+   					<p id='total'> $45.50</p>
+				</div>
+    			<button class="confirm-btn" onclick="checkoutOrOrder()">Confirm</button>
+			</div>
+		`;
+}
+
+function changeQuantity(amount) {
+	quantity += amount;
+
+	// STOP BELOW 1
+	quantity = quantity < 1 ? 1 : quantity;
+	// UPDATE SCREEN
+	document.getElementById("quantity").innerText = quantity;
+
+	const total = quantity * price;
+
+	document.getElementById("total").innerText = total.toFixed(2);
+}
+
+function checkoutOrOrder() {
+	result.innerHTML = "";
+
+	result.innerHTML = `
+			<div class="order-modal">  				 
+    			<button class="checkout-btn" onclick="checkout()">Checkout</button>
+				<button class="again-btn" onclick="startOver()">Find My Food Again</button>
+			</div>
+		`;
+}
+
+// =========================
+// CHECKOUT PAGE
+// =========================
+
+function checkout() {
+	alert("Feature coming soon — the developer is still in training 🍳😆");
 }

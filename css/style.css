@@ -11,7 +11,6 @@ body {
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	padding: 40px;
 	color: white;
 }
 
@@ -30,8 +29,9 @@ h1 {
 
 h4 {
 	text-align: center;
-	margin-bottom: 30px;
+	margin-bottom: 50px;
 	color: #f6d059;
+	font-style: italic;
 }
 
 .form-group {
@@ -92,7 +92,8 @@ button:hover {
 
 #warning {
 	margin-top: 10px;
-	color: #ffb3b3;
+	color: #ff4d4d;
+
 }
 
 .result {
@@ -105,10 +106,6 @@ button:hover {
 .result h2 {
 	color: #f6d059;
 	margin-bottom: 10px;
-}
-
-.result p {
-	color: white;
 }
 
 .tag {
@@ -140,4 +137,77 @@ button:hover {
 	display: flex;
 	gap: 10px;
 	margin-top: 20px;
+}
+
+/* ORDER SCREEN*/
+.order-modal {
+    width: 600px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.order-modal h2 {
+    font-size: 18px;
+    margin: 10px 10px 10px;
+	align-items: center;
+	justify-content: center;
+}
+
+.quantity-box {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.quantity-box button {
+    width: 35px;
+    height: 35px;			
+    border: none;
+	padding: 0;
+    background: #c45b0a;
+    color: white;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+.quantity-box button:hover{
+	color: #0b5a37;
+	background-color: #f6d059;
+
+}
+
+#quantity {
+    font-size: 16px;
+    min-width: 20px;
+    text-align: center;
+}
+
+.total-box {
+align-items: center;
+margin: 0 20px;
+}
+
+.price-box {
+align-items: center;
+margin-left: 20px;
+}
+
+.title{
+	font-size: 10px;
+	margin-bottom: 5px;
+	color: #f6d059;
+}
+
+#total {
+	font-weight: bold;
+}
+
+.confirm-btn {
+	width: 20%;
+    border: none;
+    background: #c45b0a;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
 }
