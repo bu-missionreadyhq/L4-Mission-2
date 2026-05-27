@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Noto+Sans+Thai:wght@100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+
+
+    <link rel="stylesheet" href="./css/style.css">
+    <script src="/js/main.js" defer></script>
+    <title>Thai Food Recommender</title>
+</head>
+<body>
+    <div class="app">
+
+        <h1>🍜 Thai Food Recommender</h1>
+        <div class="options" id="options">
+            <!-- MEAT -->
+            <div class="form-group">
+                <label>Choose Meat</label>
+                <select id="meat">
+                    <option value="chicken">Chicken</option>
+                    <option value="beef">Beef</option>
+                    <option value="shrimp">Shrimp</option>
+                    <option value="tofu">Tofu</option>
+                </select>
+            </div>
+
+            <!-- VEGETABLES -->
+            <div class="form-group">
+                <label>Select up to 3 Vegetables</label>
+                <div class="vegetable-list">
+                    <label class="veg-item">
+                        <input type="checkbox" value="basil" class="veg">
+                        Basil
+                    </label>
+                    <label class="veg-item">
+                        <input type="checkbox" value="onion" class="veg">
+                        Onion
+                    </label>
+                    <label class="veg-item">
+                        <input type="checkbox" value="mushroom" class="veg">
+                        Mushroom
+                    </label>
+                    <label class="veg-item">
+                        <input type="checkbox" value="eggplant" class="veg">
+                        Eggplant
+                    </label>
+
+                    <label class="veg-item">
+                        <input type="checkbox" value="papaya" class="veg">
+                        Papaya
+                    </label>
+
+                    <label class="veg-item">
+                        <input type="checkbox" value="tomato" class="veg">
+                        Tomato
+                    </label>
+                </div>
+                <p id="warning"></p>
+            </div>
+
+
+            <!-- SPICY -->
+            <div class="form-group">
+                <label>Spicy Level</label>
+                <select id="spicy">
+                    <option value="mild">Mild</option>
+                    <option value="medium">Medium</option>
+                    <option value="kiwihot">Kiwi Hot</option>
+                    <option value="thaihot">Thai Hot</option>
+                </select>
+            </div>
+
+            <!-- CATEGORY -->
+            <div class="form-group">
+                <label>Cooking Style</label>
+                <select id="category">
+                    <option value="stirfry">Stir Fry</option>
+                    <option value="curry">Curry</option>
+                    <option value="salad">Salad</option>
+                </select>
+            </div>
+
+            <!-- BUTTON -->
+            <button id="findBtn">Find My Food </button>
+        </div>
+        <!-- RESULT -->
+        <div class="result" id="result"></div>
+    </div>
+</body>
+</html>
