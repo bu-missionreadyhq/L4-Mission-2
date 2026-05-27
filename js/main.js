@@ -63,9 +63,11 @@ findBtn.addEventListener("click", findFood);
 // =========================
 
 function checkLimit(event) {
-	const totalChecked = countVegetables();
-
+	const totalChecked = getSelectedVegetables().length;
+    
 	if (totalChecked > 3) {
+
+		//CHECKBOX HAS THE PROPERTY OF CHECK [https://www.w3schools.com/jsreF/prop_checkbox_checked.asp]
 		event.target.checked = false;
 		warning.innerText = "You can only select 3 vegetables.";
 	} else {
@@ -73,9 +75,10 @@ function checkLimit(event) {
 	}
 }
 
-function countVegetables() {
-	return getSelectedVegetables().length;
-}
+//?? TOO MUCH SEPERATION THAT THERE IS ON LINE OF CODE HERE ??
+// function countVegetables() {
+// 	return getSelectedVegetables().length;
+// }
 
 // =========================
 // GET SELECTED VEGETABLES
@@ -135,7 +138,7 @@ function findFood() {
 	if (foundDish) {
 		showDish(
 			foundDish.name,
-			"Perfect match for your taste!",
+			" 😉 Perfect match for your taste!",
 			foundDish.image,
 			true,
 			foundDish,
