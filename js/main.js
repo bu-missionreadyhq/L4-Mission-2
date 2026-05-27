@@ -24,7 +24,7 @@ const dishes = [
 		name: "Papaya Salad",
 		category: "salad",
 		meat: "shrimp",
-		vegetables: ["basil", "onion", "mushroom", "papaya", "tomato"],
+		vegetables: ["basil", "onion", "mushroom", "papaya", "tomato", 'eggplant'],
 		spicy: "kiwihot",
 		image: "images/papaya-salad.jpg",
 	},
