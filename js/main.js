@@ -5,6 +5,7 @@ const dishes = [
 	{
 		id: 1,
 		name: "Pad Kra Pao",
+		price: 30.25,
 		category: "stirfry",
 		meat: "beef",
 		vegetables: ["basil", "onion"],
@@ -15,6 +16,7 @@ const dishes = [
 	{
 		id: 2,
 		name: "Green Curry",
+		price: 40.25,
 		category: "curry",
 		meat: "chicken",
 		vegetables: ["eggplant", "basil"],
@@ -25,6 +27,7 @@ const dishes = [
 	{
 		id: 3,
 		name: "Papaya Salad",
+		price: 50.5,
 		category: "salad",
 		meat: "shrimp",
 		vegetables: [
@@ -42,6 +45,7 @@ const dishes = [
 	{
 		id: 5,
 		name: "Mushroom Stir Fry",
+		price: 60.25,
 		category: "stirfry",
 		meat: "tofu",
 		vegetables: ["mushroom", "onion"],
@@ -197,11 +201,10 @@ function generateVegTags(dish) {
 	let vegetableTags = "";
 
 	for (let i = 0; i < dish.vegetables.length; i++) {
-		vegetableTags += `
-            <div class="tag">
+		vegetableTags += `<div class="tag">
                 ${dish.vegetables[i]}
             </div>
-        `;
+       		`;
 	}
 
 	return `
@@ -238,44 +241,41 @@ function startOver() {
 	document.getElementById("options").style.display = "block";
 }
 
-
 // =========================
 // ORDER PAGE
 // =========================
 
 let quantity = 1;
-
 //ONLY ONE PRICE AS THERE IS NO PRICE VALUE FOR THE DISHES YET
-const price = 45.5;
-
 function openOrderForm(id) {
 	result.innerHTML = "";
 
 	const dish = dishes.find((dish) => dish.id === id);
 
-	result.innerHTML = `
-			<div class="order-modal">
+	const price = dish.price;
+
+	result.innerHTML = `<div class="order-modal">
    				 <h2>${dish.name}</h2>
    				 <div class="quantity-box">
-					<button onclick="changeQuantity(-1)">-</button>
+					<button onclick="changeQuantity(-1, ${price})">-</button>
 					<p class='title'>Qty</p>
 					<span id="quantity">1</span>
-      				  <button onclick="changeQuantity(1)">+</button>
+      				  <button onclick="changeQuantity(1, ${price})">+</button>
    				 </div>
 				 <div class="price-box">
 				 	<p class='title'>Price:</p>
-					<p>$45.50</p>
+					<p>${dish.price}</p>
 				 </div>
 				 <div class="total-box">
 				 	<p class='title'>Total:</>
-   					<p id='total'> $45.50</p>
+   					<p id='total'>${dish.price} </p>
 				</div>
     			<button class="confirm-btn" onclick="checkoutOrOrder()">Confirm</button>
 			</div>
-		`;
+			`;
 }
 
-function changeQuantity(amount) {
+function changeQuantity(amount, price) {
 	quantity += amount;
 
 	// STOP BELOW 1
@@ -289,14 +289,14 @@ function changeQuantity(amount) {
 }
 
 function checkoutOrOrder() {
+	quantity = 1;
 	result.innerHTML = "";
 
-	result.innerHTML = `
-			<div class="order-modal">  				 
+	result.innerHTML = `<div class="order-modal">  				 
     			<button class="checkout-btn" onclick="checkout()">Checkout</button>
 				<button class="again-btn" onclick="startOver()">Find My Food Again</button>
 			</div>
-		`;
+			`;
 }
 
 // =========================
